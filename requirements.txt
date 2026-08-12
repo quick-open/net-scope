@@ -1,2 +1,5 @@
 # NetScope runtime deps — permissive/weak-copyleft only, no AGPL/proprietary.
 dnspython>=2.3
+# GUI — the Aura design system layers on CustomTkinter (MIT) + darkdetect.
+customtkinter>=5.2
+darkdetect>=0.8

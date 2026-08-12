@@ -20,8 +20,10 @@ jobs:
           pyinstaller --onefile --windowed --name NetScope
           --icon net-scope.ico
           --version-file packaging/version.txt
+          --hidden-import netscope.__main__
           --add-data "net-scope.ico;."
           --collect-submodules dns
+          --collect-all customtkinter
           net_scope_app.py
       - name: Stage installer inputs
         shell: pwsh
@@ -41,4 +43,10 @@ jobs:
           path: |
             dist/NetScope.exe
             packaging/dist/NetScope-Setup.exe
+          if-no-files-found: error
+      - name: Upload staging (for signed repack)
+        uses: actions/upload-artifact@v4
+        with:
+          name: net-scope-staging
+          path: packaging/staging
           if-no-files-found: error

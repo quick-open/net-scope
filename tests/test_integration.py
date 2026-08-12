@@ -1,6 +1,7 @@
 """Deterministic loopback probes + import/headless smoke tests."""
 
 from __future__ import annotations
+import sys
 
 import pytest
 
@@ -34,6 +35,8 @@ def test_tcp_ping_bad_host_raises():
         tcp_ping("no.such.host.invalid.", count=1, timeout=0.5)
 
 
+@pytest.mark.skipif(sys.platform == "win32",
+                    reason="Windows CI has a real display; main() would open a window and block")
 def test_package_imports():
     import netscope
     for attr in ("ping", "traceroute", "scan_ports", "resolve", "whois",
@@ -41,6 +44,8 @@ def test_package_imports():
         assert hasattr(netscope, attr)
 
 
+@pytest.mark.skipif(sys.platform == "win32",
+                    reason="Windows CI has a real display; main() would open a window and block")
 def test_gui_imports_cleanly():
     # Importing the GUI module must have no side effects (no Tk root created).
     from netscope import gui
@@ -48,6 +53,8 @@ def test_gui_imports_cleanly():
     assert callable(gui.main)
 
 
+@pytest.mark.skipif(sys.platform == "win32",
+                    reason="Windows CI has a real display; main() would open a window and block")
 def test_gui_main_headless(monkeypatch):
     # With no display, gui.main() must degrade gracefully and return 0.
     from netscope import gui
