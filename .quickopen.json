@@ -1,13 +1,14 @@
 {
   "slug": "net-scope",
   "name": "NetScope",
-  "tagline": "Network diagnostics \u2014 ping, traceroute, port scan, DNS, whois and LAN discovery.",
+  "tagline": "Network diagnostics — ping, traceroute, port scan, DNS, whois and LAN discovery.",
   "categorySlug": "network-analysis",
   "license": "Apache-2.0",
   "description": "A desktop network toolkit: ping and traceroute with charts, TCP/UDP port scanning, DNS lookups and record inspection, WHOIS, reverse-DNS, a subnet calculator, and LAN device discovery. Everything runs locally; pairs with PrivateFirewall and Infra Monitor.",
   "aiStack": "Python (tkinter + CLI), dnspython",
   "platforms": [
-    "windows"
+    "windows",
+    "linux"
   ],
   "buildEntry": "net_scope_app.py"
 }
