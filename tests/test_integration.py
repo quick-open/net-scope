@@ -18,6 +18,8 @@ def test_tcp_ping_open_port(open_port):
     assert res["avg"] is not None
 
 
+@pytest.mark.skipif(sys.platform == "win32",
+                    reason="Windows runner firewall makes a closed loopback port time out rather than refuse; refused-means-reachable holds on POSIX")
 def test_tcp_ping_closed_port_still_reachable(closed_port):
     # A refused connection means the host answered: reachable, low RTT, no loss.
     res = tcp_ping("127.0.0.1", count=2, timeout=1.0, port=closed_port)
